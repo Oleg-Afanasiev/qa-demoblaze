@@ -37,6 +37,14 @@ public class LaptopsPage extends BasePage {
     }
 
     public List<Laptop> getLaptops() {
+        List<Laptop> laptops = new ArrayList<>();
 
+        List<String> names = getNameLaptop();
+        List<Integer> prices = getPricesLaptop();
+
+        for (int i = 0; i < names.size(); i++) {
+            laptops.add(new Laptop(names.get(i), prices.get(i)));
+        }
+        return laptops;
     }
 }
