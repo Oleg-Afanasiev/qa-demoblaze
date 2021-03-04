@@ -41,13 +41,15 @@ public class DemoTests extends BaseTest {
     }
 
     private List<Laptop> readLaptops(String path) {
-        String csvSplitter = ",";
+        final String csvSplitter = ",";
+        final String commentPrefix = "#";
+
         List<Laptop> result = new ArrayList<>();
 
         try (BufferedReader br = new BufferedReader(new java.io.FileReader(path))) {
             String line;
             while ((line = br.readLine()) != null) {
-                if (line.charAt(0) == '#') {
+                if (line.startsWith(commentPrefix)) {
                     continue;
                 }
 
