@@ -1,6 +1,7 @@
 package com.academy.project;
 
 import com.academy.core.test.BaseTest;
+import com.academy.core.util.PropertyProvider;
 import com.academy.project.model.Laptop;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,17 +17,6 @@ import static com.academy.project.page.HomePage.startFromHome;
 public class DemoTests extends BaseTest {
     private static final Logger LOG =  LoggerFactory.getLogger(DemoTests.class);
 
-    @Test(dataProvider = "testDataProvider")
-    @Ignore
-    public void testFeature(String value) {
-        String title = startFromHome(driver, baseUrl)
-                .inputSearch(value)
-                .clickSearch()
-                .getTitle();
-
-        Assert.assertTrue(title.contains(value));
-    }
-
     @Test(dataProvider = "laptopsProvider")
     public void testCheckListLaptops(List<Laptop> laptopsExpected) {
         List<Laptop> laptopsActual = startFromHome(driver, baseUrl)
@@ -36,10 +26,17 @@ public class DemoTests extends BaseTest {
         // assert laptopsActual = laptopsExpected
     }
 
-    @DataProvider(name="testDataProvider")
-    public Object[][] testDataProvider() {
+    @DataProvider(name="laptopsProvider")
+    public Object[][] laptopsProvider() {
+        String path = PropertyProvider.get("laptops");
+        List<Laptop> laptops = readLaptops(path);
+
         return new Object[][] {
-                {"Selenium Java"}
+                {laptops}
         };
+    }
+
+    private List<Laptop> readLaptops(String path) {
+
     }
 }
