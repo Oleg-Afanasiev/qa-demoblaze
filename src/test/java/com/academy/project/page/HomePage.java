@@ -20,6 +20,9 @@ public class HomePage extends BasePage {
 
     public LaptopsPage clickLaptopLink() {
         laptopLink.click();
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException ignore) {}
         return new LaptopsPage(driver);
     }
 }
