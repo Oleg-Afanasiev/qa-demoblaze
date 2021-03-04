@@ -6,6 +6,9 @@ public class Laptop {
     private String name;
     private int price;
 
+    public Laptop() {
+    }
+
     public Laptop(String name, int price) {
         this.name = name;
         this.price = price;
