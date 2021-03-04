@@ -7,13 +7,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
-import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 
 import static com.academy.project.page.HomePage.startFromHome;
@@ -28,6 +27,12 @@ public class DemoTests extends BaseTest {
                 .getLaptops();
 
         // assert laptopsActual = laptopsExpected
+        Assert.assertEquals(laptopsActual.size(), laptopsExpected.size());
+
+        laptopsActual.sort(Comparator.comparing(Laptop::getName));
+        laptopsExpected.sort(Comparator.comparing(Laptop::getName));
+
+        Assert.assertEquals(laptopsActual, laptopsExpected);
     }
 
     @DataProvider(name="laptopsProvider")
